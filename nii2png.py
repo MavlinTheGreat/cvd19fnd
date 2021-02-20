@@ -27,7 +27,7 @@ def convert(inputfile):
             slice_counter = 0
             # iterate through slices
             for current_slice in range(0, total_slices):
-                if (slice_counter % 1) == 0 and abs((total_volumes // 2) - current_volume) < 5:
+                if (slice_counter % 1) == 0 and abs((total_volumes // 2) - current_volume) < 2:
                     data = numpy.rot90(image_array[:, :, current_slice, current_volume])
                     #alternate slices and save as png
                     image_name = inputfile[:-4] + "_" + str(current_volume) + ".png"
@@ -59,7 +59,7 @@ def convert(inputfile):
                         
 
                 #alternate slices and save as png
-                if (slice_counter % 1) == 0 and abs((total_slices // 2) - current_slice) < 5:
+                if (slice_counter % 1) == 0 and abs((total_slices // 2) - current_slice) < 2:
                     image_name = inputfile[:-4] + "_z" + "{:0>3}".format(str(current_slice+1))+ ".png"
                     imageio.imwrite(image_name, data)
 
