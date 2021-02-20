@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 from sklearn.metrics import f1_score
 import csv
-from neurpred import neural_pred
+from neurpred import neural_pred # определение Covid
 
 def csv_reader(file_obj):
     """
     Read a csv file
     """
     reader = csv.reader(file_obj)
-    # next(reader, None)
     labels = []
     for row in reader:
-        # print(row)
         labels.append(int(row[1]))
     return labels
 
@@ -23,7 +21,7 @@ def load_data(csv_path):
     return labels
 
 
-def make_a_party():
+def make_a_party(): # заполнение data_decision.csv
     with open("data_decision.csv", encoding="UTF-8") as ddc:
         lines = ddc.readlines()
         for i in range(len(lines)):
