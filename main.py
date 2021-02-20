@@ -4,9 +4,6 @@ import csv
 from neurpred import neural_pred # определение Covid
 
 def csv_reader(file_obj):
-    """
-    Read a csv file
-    """
     reader = csv.reader(file_obj)
     labels = []
     for row in reader:
