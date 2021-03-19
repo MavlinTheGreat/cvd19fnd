@@ -1,5 +1,5 @@
 import scipy, numpy, shutil, os, nibabel
-import sys, getopt
+import sys
 import imageio
 import extracting # распаковка gzip архива
 
