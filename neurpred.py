@@ -30,6 +30,6 @@ def neural_pred(gz_path):
         prediction = model.predict(img_expended)
         pr_zdr += prediction[0][0]
         pr_bol += prediction[0][1]
-    if pr_bol >= pr_zdr: # инфецирован
+    if pr_bol >= pr_zdr: # инфицирован
         return 1
-    return 0 # не инфецирован
+    return 0 # не инфицирован
