@@ -13,32 +13,8 @@ def convert(inputfile):
     print('Output folder is ', outputfile)
     # загрузка nii файла в виде массива
     image_array = nibabel.load(inputfile).get_data()
-    # если изображение 4хмерное
-    if len(image_array.shape) == 4:
-        nx, ny, nz, nw = image_array.shape
-        if not os.path.exists(outputfile):
-            os.makedirs(outputfile)
-        total_volumes = image_array.shape[3]
-        total_slices = image_array.shape[2]
-        for current_volume in range(0, total_volumes):
-            slice_counter = 0
-            for current_slice in range(0, total_slices):
-                """
-                Опытным путём выяснено, что чаще всего covid-19
-                наиболее выражен в срезе в середине ряда всех получаемых изображений.
-                Для большей достоверности анализируется также и прошлый срез, так как в них следы ковида встречаются чаще,
-                чем в последующих изображениях.
-                """
-                if (slice_counter % 1) == 0 and ((current_volume == total_volumes // 2) or (current_volume == total_volumes // 2 - 1)):
-                    data = numpy.rot90(image_array[:, :, current_slice, current_volume])
-                    image_name = inputfile[:-4] + "_" + str(current_volume) + ".png"
-                    imageio.imwrite(image_name, data)
-                    src = image_name
-                    shutil.move(src, outputfile)
-                    slice_counter += 1
-
-    # если изображение в 3д
-    elif len(image_array.shape) == 3:
+    # проверка, что данные точно трёхмерные
+    if len(image_array.shape) == 3:
         nx, ny, nz = image_array.shape
         if not os.path.exists(outputfile):
             os.makedirs(outputfile)
